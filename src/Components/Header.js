@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import menuLinksData from "./data/menu_links.json"
 
 const Header = () => {
     const [menuLinksData, setMenuLinksData] = useState([]);

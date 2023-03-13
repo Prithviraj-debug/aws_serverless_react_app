@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import galleryData from "./data/welcome_gallery.json"
 
 export default function Welcome() {
 
