@@ -1,7 +1,25 @@
-import React from 'react'
-import galleryData from "./data/welcome_gallery.json"
+import React, { useState, useEffect } from 'react'
+// import galleryData from "./data/welcome_gallery.json"
 
 export default function Welcome() {
+
+    const [galleryData, setGalleryData] = useState([]);
+
+    const loadGalleryData = async () => {
+        // Qyery the api gw
+        const resp = await fetch('https://hoot42w0t1.execute-api.us-east-1.amazonaws.com/Production/img-gallery');
+        let jsonData = await resp.json();
+
+        //Assign res data to our state var.
+        setGalleryData(jsonData)
+        console.log(jsonData)
+    }
+
+    useEffect(() => {
+        // Load the menu links data from the api gateway
+        loadGalleryData();
+    }, [])
+
     return (
         <div className="scene" id="welcome">
             <article className="content">

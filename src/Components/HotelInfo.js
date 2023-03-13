@@ -1,8 +1,34 @@
-import React from 'react'
-import servData from "./data/services.json"
-import accData from "./data/accessibility.json"
+import React, { useState, useEffect } from 'react'
 
 export default function HotelInfo() {
+
+    const [servData, setServData] = useState([]);
+    const [accData, setAccData] = useState([]);
+
+    const loadServData = async () => {
+        // Qyery the api gw
+        const resp = await fetch('https://hoot42w0t1.execute-api.us-east-1.amazonaws.com/Production/services');
+        let jsonData = await resp.json();
+
+        //Assign res data to our state var.
+        setServData(jsonData)
+    }
+
+    const loadAccData = async () => {
+        // Qyery the api gw
+        const resp = await fetch('https://hoot42w0t1.execute-api.us-east-1.amazonaws.com/Production/accessiblities');
+        let jsonData = await resp.json();
+
+        //Assign res data to our state var.
+        setAccData(jsonData)
+    }
+
+    useEffect(() => {
+        // Load the menu links data from the api gateway
+        loadServData();
+        loadAccData();
+    }, [])
+
     return (
         <div className="scene" id="hotelinfo">
             <article className="heading">
@@ -37,7 +63,7 @@ export default function HotelInfo() {
                     <ul>
                         {
                             accData.map((service) =>
-                                <li>{service.service}</li>
+                                <li>{service.name}</li>
                             )
                         }
                     </ul>
